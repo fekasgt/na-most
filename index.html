@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+	<title>GombGame</title>
+
+	<style type="text/css">
+		body {
+			background: rgb(0,0,0);
+            background: linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(121,9,9,1) 50%, rgba(254,255,0,1) 100%);
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+		}
+
+		#inputId {
+			color: #f3f3f3;
+			margin-top: 0.7em;
+			font-size: 300%;
+			/*text-transform: uppercase;*/
+			font-family: sans-serif;
+			text-align: center;
+			background: #1c1c1c;
+			border: none;
+		}
+
+		#mainText {
+			margin-top: 0.7em;
+			font-family: sans-serif;
+			color: #f3f3f3;
+			font-size: 500%;
+			text-shadow: 5px 5px 8px black;
+		}
+
+		#userNumbersEnd {
+			font-family: sans-serif;
+			color: #f3f3f3;
+			font-size: 300%;
+			text-transform: uppercase;
+			text-shadow: 5px 5px 8px black;
+		}
+
+		#userNumberResult {
+			margin-top: 0.5em;
+			font-family: monospace;
+			color: #46ff40;
+			font-size: 1000%;
+			text-transform: uppercase;
+			text-shadow: 5px 5px 8px black;
+		}
+
+		#restart {
+			margin-top: 2em;
+            padding: 0.1em 0.3em;
+            font-family: sans-serif;
+            color: #f3f3f3;
+            background-image: linear-gradient(#cf3a3a,#751c1c);
+            font-size: 150%;
+            text-decoration: none;
+            text-transform: uppercase;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            border: none;
+            border-color: #f3f3f3;
+            border-radius: 20px 20px 20px 20px;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 5px 5px 9px #ff1717, 10px 10px 12px black;
+		}
+
+		#restart:hover {
+			background-image: linear-gradient(grey,black);
+			cursor: pointer;
+		}
+	</style>
+
+
+</head>
+<body>
+
+	<h1 id="mainText">Kérlek adj meg 5 számot</h1>
+
+	<div id="inputCntr">
+		<input id="inputId" type="number" min="0" max="50" step="1" placeholder="enter..."></input>
+	</div>
+
+	<div id="userNumbersEnd"></div>
+
+	<div id="userNumberResult"></div>
+
+	<button id="restart" onclick="restartPage()">Restart</button>
+
+	<script type="text/javascript">
+		var a = document.getElementById("InputId");
+		var userNumbers = [];
+
+		function userNumbersLength() {
+			return userNumbers.length;
+		}
+
+		function inputLength() {
+			return inputId.value.length;
+		}
+
+		function ez(event) {
+			var b = event.wich || event.keyCode;
+			if (b === 13) {
+				valueStore();
+			}	
+		}
+
+		function valueStore() {
+			if (inputLength() > 0) {
+				inputValueSave();
+				inputId.value = "";
+			}
+		}
+
+		function inputValueSave() {
+			var szam1 = inputId.value;
+			userNumbers.push(szam1);
+			if (userNumbersLength() == 5) {
+				numberResults();
+			}
+		}
+
+		function numberResults() {
+			inputId.style.display = ("none");
+			mainText.innerHTML = "Íme az eredmény";
+			userNumbersEnd.innerHTML = userNumbers;
+			randomNumber();
+		}
+
+		function randomNumber() {
+			var random = Math.floor(Math.random() * userNumbers.length);
+			var randomResult = userNumbers[random];
+			userNumberResult.innerHTML = randomResult;
+
+		}
+
+		function restartPage() {
+			location.reload();
+		}
+
+		inputId.addEventListener("keydown", ez);
+	</script>
+
+</body>
+</html>
